@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalyst Partnership Application</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .intro {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .intro h2 {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .required {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f8f9ff;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background: #f0f2ff;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: #f8f9ff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .radio-item:hover {
+            background: #f0f2ff;
+        }
+
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .radio-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .help-text {
+            font-size: 0.85em;
+            color: #777;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #c3e6cb;
+            margin-top: 20px;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            .logo {
+                font-size: 2em;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">APEX ADVISORY</div>
+            <div class="tagline">Partnership Application</div>
+        </div>
+
+        <div class="intro">
+            <h2>Build Something Exceptional from the Ground Up</h2>
+            <p>Thank you for your interest in partnering to build Apex Advisory—a modern business advisory practice
+                focused on Businesses and commercial projects >$1M Revenue.</p>
+            <p>This brief questionnaire helps us understand your background, goals, and fit for an equal partnership
+                opportunity.</p>
+        </div>
+
+        <form id="partnershipForm">
+            <!-- Personal Information -->
+            <div class="section-title">Personal Information</div>
+
+            <div class="form-group">
+                <label for="fullName">Full Name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" required placeholder="04XX XXX XXX">
+            </div>
+
+            <div class="form-group">
+                <label for="location">Current Location <span class="required">*</span></label>
+                <input type="text" id="location" name="location" required placeholder="City, State">
+                <div class="help-text">Melbourne-based preferred, but open to relocation discussions</div>
+            </div>
+
+            <!-- Professional Qualifications -->
+            <div class="section-title">Professional Qualifications</div>
+
+            <div class="form-group">
+                <label>Do you currently hold an active Tax Agent License? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="taxLicenseYes" name="taxLicense" value="yes" required>
+                        <label for="taxLicenseYes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="taxLicenseNo" name="taxLicense" value="no">
+                        <label for="taxLicenseNo">No</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="taxLicenseProgress" name="taxLicense" value="in-progress">
+                        <label for="taxLicenseProgress">In Progress</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="taxAgentNumber">Tax Agent Registration Number (if applicable)</label>
+                <input type="text" id="taxAgentNumber" name="taxAgentNumber"
+                    placeholder="Enter your registration number">
+            </div>
+
+            <div class="form-group">
+                <label for="qualifications">Professional Qualifications <span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="qualCPA" name="qualifications" value="CPA">
+                        <label for="qualCPA">CPA Australia</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="qualCA" name="qualifications" value="CA">
+                        <label for="qualCA">Chartered Accountants ANZ</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="qualIPA" name="qualifications" value="IPA">
+                        <label for="qualIPA">IPA (Institute of Public Accountants)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="qualOther" name="qualifications" value="Other">
+                        <label for="qualOther">Other (please specify in additional comments)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Years of Accounting/Tax Experience <span class="required">*</span></label>
+                <select id="experience" name="experience" required>
+                    <option value="">Select experience level</option>
+                    <option value="0-2">0-2 years</option>
+                    <option value="3-5">3-5 years</option>
+                    <option value="6-10">6-10 years</option>
+                    <option value="11-15">11-15 years</option>
+                    <option value="16+">16+ years</option>
+                </select>
+            </div>
+
+            <!-- Technical Competencies -->
+            <div class="section-title">Technical Competencies</div>
+
+            <div class="form-group">
+                <label>Please rate your confidence level with the following: <span class="required">*</span></label>
+                <div class="help-text" style="margin-bottom: 15px;">Rate from 1 (Beginner) to 5 (Expert)</div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="basConfidence" style="font-weight: 500; color: #555;">BAS Statements</label>
+                    <select id="basConfidence" name="basConfidence" required style="margin-top: 5px;">
+                        <option value="">Select confidence level</option>
+                        <option value="5">5 - Expert (can handle complex scenarios independently)</option>
+                        <option value="4">4 - Advanced (confident with most scenarios)</option>
+                        <option value="3">3 - Competent (can handle routine tasks)</option>
+                        <option value="2">2 - Basic (require supervision for complex items)</option>
+                        <option value="1">1 - Beginner (limited experience)</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="taxReturnsConfidence" style="font-weight: 500; color: #555;">Company Tax Returns</label>
+                    <select id="taxReturnsConfidence" name="taxReturnsConfidence" required style="margin-top: 5px;">
+                        <option value="">Select confidence level</option>
+                        <option value="5">5 - Expert</option>
+                        <option value="4">4 - Advanced</option>
+                        <option value="3">3 - Competent</option>
+                        <option value="2">2 - Basic</option>
+                        <option value="1">1 - Beginner</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="fbtConfidence" style="font-weight: 500; color: #555;">FBT Returns</label>
+                    <select id="fbtConfidence" name="fbtConfidence" required style="margin-top: 5px;">
+                        <option value="">Select confidence level</option>
+                        <option value="5">5 - Expert</option>
+                        <option value="4">4 - Advanced</option>
+                        <option value="3">3 - Competent</option>
+                        <option value="2">2 - Basic</option>
+                        <option value="1">1 - Beginner</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Do you have payroll experience? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="payrollExtensive" name="payrollExperience" value="extensive" required>
+                        <label for="payrollExtensive">Extensive</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="payrollSome" name="payrollExperience" value="some">
+                        <label for="payrollSome">Some</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="payrollLimited" name="payrollExperience" value="limited">
+                        <label for="payrollLimited">Limited</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="payrollNone" name="payrollExperience" value="none">
+                        <label for="payrollNone">None</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Industry & Business Development -->
+            <div class="section-title">Industry Knowledge & Business Development</div>
+
+            <div class="form-group">
+                <label for="constructionExperience">Do you have experience working with clients in the construction
+                    industry?</label>
+                <textarea id="constructionExperience" name="constructionExperience"
+                    placeholder="Describe any experience with residential construction, builders, contractors, or related industries..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="clientRelationships">Do you have existing client relationships you could bring to the
+                    partnership?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="clientsYes" name="clientRelationships" value="yes">
+                        <label for="clientsYes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="clientsMaybe" name="clientRelationships" value="maybe">
+                        <label for="clientsMaybe">Potentially</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="clientsNo" name="clientRelationships" value="no">
+                        <label for="clientsNo">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="businessDevelopment">Rate your interest/experience in business development and client
+                    acquisition: <span class="required">*</span></label>
+                <select id="businessDevelopment" name="businessDevelopment" required>
+                    <option value="">Select level</option>
+                    <option value="passionate">Passionate - I love building relationships and growing business</option>
+                    <option value="comfortable">Comfortable - I can do it and enjoy it</option>
+                    <option value="willing">Willing - I'll learn and contribute</option>
+                    <option value="prefer-technical">Prefer technical - I'd rather focus on service delivery</option>
+                </select>
+            </div>
+
+            <!-- Partnership Motivation -->
+            <div class="section-title">Partnership Motivation & Vision</div>
+
+            <div class="form-group">
+                <label for="motivation">What's driving your interest in a partnership versus staying employed? <span
+                        class="required">*</span></label>
+                <textarea id="motivation" name="motivation" required
+                    placeholder="Be honest - we want to understand what motivates you..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="timeline">What's your timeline for making a transition? <span
+                        class="required">*</span></label>
+                <select id="timeline" name="timeline" required>
+                    <option value="">Select timeline</option>
+                    <option value="immediate">Immediate (available now or within 1 month)</option>
+                    <option value="1-3-months">1-3 months</option>
+                    <option value="3-6-months">3-6 months</option>
+                    <option value="6-12-months">6-12 months</option>
+                    <option value="exploring">Just exploring options</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="partnershipExpectations">What would you want in an ideal partnership arrangement? <span
+                        class="required">*</span></label>
+                <textarea id="partnershipExpectations" name="partnershipExpectations" required
+                    placeholder="Think about equity split, decision-making, role division, financial expectations, etc..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="constructionView">What's your view on targeting the construction industry
+                    specifically?</label>
+                <textarea id="constructionView" name="constructionView"
+                    placeholder="Share your thoughts on this niche focus - opportunities, challenges, interest level..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="entrepreneurialExperience">Have you previously attempted to start your own practice or
+                    business?</label>
+                <textarea id="entrepreneurialExperience" name="entrepreneurialExperience"
+                    placeholder="Tell us about any entrepreneurial ventures or attempts..."></textarea>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="section-title">Additional Information</div>
+
+            <div class="form-group">
+                <label for="strengths">What are your top 3 professional strengths that you'd bring to this
+                    partnership?</label>
+                <textarea id="strengths" name="strengths"
+                    placeholder="e.g., Client relationships, technical tax expertise, business development, operational efficiency..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="concerns">Do you have any concerns or questions about this partnership opportunity?</label>
+                <textarea id="concerns" name="concerns"
+                    placeholder="Be candid - this helps us address expectations upfront..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="additionalComments">Anything else you'd like us to know?</label>
+                <textarea id="additionalComments" name="additionalComments"
+                    placeholder="Additional qualifications, unique experiences, personal values, etc..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="referralSource">How did you hear about this partnership opportunity? <span
+                        class="required">*</span></label>
+                <select id="referralSource" name="referralSource" required>
+                    <option value="">Select source</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="reddit">Reddit</option>
+                    <option value="facebook">Facebook Group</option>
+                    <option value="cpa">CPA Australia</option>
+                    <option value="ca">Chartered Accountants ANZ</option>
+                    <option value="whirlpool">Whirlpool Forums</option>
+                    <option value="gumtree">Gumtree</option>
+                    <option value="meetup">Meetup.com</option>
+                    <option value="referral">Personal Referral</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Partnership Application</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <h3>✅ Application Submitted Successfully!</h3>
+            <p style="margin-top: 10px;">Thank you for your interest in partnering with Catalyst. We'll review your
+                application and be in touch within 2-3 business days.</p>
+            <p style="margin-top: 10px; font-weight: 600;">Check your email for confirmation.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('partnershipForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+
+            // Convert FormData to object
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    // Handle multiple checkboxes
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+
+            // Log to console (in production, you'd send this to your backend)
+            console.log('Partnership Application Data:', data);
+
+            // Create email subject and body
+            const emailSubject = `Catalyst Partnership Application - ${data.fullName}`;
+            const emailBody = `
+Partnership Application Details:
+
+PERSONAL INFORMATION:
+Name: ${data.fullName}
+Email: ${data.email}
+Phone: ${data.phone}
+Location: ${data.location}
+
+PROFESSIONAL QUALIFICATIONS:
+Tax Agent License: ${data.taxLicense}
+Tax Agent Number: ${data.taxAgentNumber || 'N/A'}
+Professional Qualifications: ${Array.isArray(data.qualifications) ? data.qualifications.join(', ') : data.qualifications || 'None selected'}
+Years of Experience: ${data.experience}
+
+TECHNICAL COMPETENCIES:
+BAS Statements: ${data.basConfidence}/5
+Company Tax Returns: ${data.taxReturnsConfidence}/5
+FBT Returns: ${data.fbtConfidence}/5
+Payroll Experience: ${data.payrollExperience}
+
+INDUSTRY & BUSINESS DEVELOPMENT:
+Construction Experience: ${data.constructionExperience || 'N/A'}
+Existing Client Relationships: ${data.clientRelationships || 'N/A'}
+Business Development Interest: ${data.businessDevelopment}
+
+PARTNERSHIP MOTIVATION:
+Motivation: ${data.motivation}
+Timeline: ${data.timeline}
+Partnership Expectations: ${data.partnershipExpectations}
+View on Construction Focus: ${data.constructionView || 'N/A'}
+Entrepreneurial Experience: ${data.entrepreneurialExperience || 'N/A'}
+
+ADDITIONAL INFORMATION:
+Professional Strengths: ${data.strengths || 'N/A'}
+Concerns/Questions: ${data.concerns || 'N/A'}
+Additional Comments: ${data.additionalComments || 'N/A'}
+Referral Source: ${data.referralSource}
+
+Submitted: ${new Date().toLocaleString()}
+            `.trim();
+
+            // In a real implementation, you would send this to your email service
+            // For now, we'll create a mailto link as a backup
+            const mailtoLink = `mailto:ApexAdvisort81@outlook.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+            // Show success message
+            document.getElementById('partnershipForm').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+
+            // Optional: Open mailto link
+            // window.location.href = mailtoLink;
+
+            // In production, you would replace the above with an AJAX call to your backend:
+            /*
+            fetch('https://your-backend-api.com/partnership-application', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('partnershipForm').style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
+            })
+            .catch(error => {
+                alert('There was an error submitting your application. Please try again or email directly.');
+            });
+            */
+        });
+
+        // Add visual feedback for form validation
+        document.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
+            field.addEventListener('invalid', function () {
+                this.style.borderColor = '#e74c3c';
+            });
+
+            field.addEventListener('input', function () {
+                if (this.validity.valid) {
+                    this.style.borderColor = '#e0e0e0';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
